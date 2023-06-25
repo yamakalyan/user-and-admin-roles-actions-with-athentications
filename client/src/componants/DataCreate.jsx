@@ -216,12 +216,12 @@ export default function DataCreate() {
             <label className="form-label">
               Enter Shipment size.
             </label>
-              <p>enter in format please give space after number</p>
+              <p>Please give space after number Dont use special charecters like , .</p>
             <input
               type="text"
               className="form-control"
               required
-              placeholder="Length, height, width "
+              placeholder="Length height width "
               onChange={handleShipmentDetails}
               />
           </div>
