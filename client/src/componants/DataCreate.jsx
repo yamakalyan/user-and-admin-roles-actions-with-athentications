@@ -7,18 +7,41 @@ export default function DataCreate() {
     const [date, setDate] = useState("")
     const [company, setCompany] = useState("")
     const [Owner, setOwner] = useState("")
-    const [item, setItem]= useState("")
-    const [Quantity, setQuantity] = useState("")
-    const [weight, setweight] = useState("")
+    const [item, setItem]= useState(0)
+    const [Quantity, setQuantity] = useState(0)
+    const [weight, setweight] = useState(0)
     const [reqShipment, setReqShipment] = useState("")
     const [trackingId, setTrackingId] = useState("")
-    const [shipmentSize, setShipmentSize] = useState("")
-    const [boxCount, setBoxCount] = useState("")
+
+    // const [shipmentSizeHeight, setShipmentSizeHeight] = useState(0)
+    // const [shipmentSizeWidth, setShipmentSizeWidth] = useState(0)
+    const [shipmentSize, setShipmentSize] = useState(["", "", ""])
+
+    const [boxCount, setBoxCount] = useState(0)
     const [specifications, setSpecifications] = useState("")
     const [checkList, setChecklist] = useState("")
 
-
     const navigator = useNavigate()
+
+
+    const handleShipmentDetails = (e)=>{
+      const inputValues = e.target.value
+      const mixValues = inputValues.split(" ")
+      setShipmentSize(mixValues)
+
+    }
+
+    const shipmentArray = []
+
+    for (let i = 0; i < shipmentSize.length; i++) {
+        const convert = parseInt(shipmentSize[i])
+        shipmentArray.push(convert)
+        
+    }
+
+    const reducing = shipmentArray.reduce((mix, value)=>{
+      return value * mix
+  })
 
  const handleCreate =(e)=>{
   e.preventDefault()
@@ -36,7 +59,7 @@ export default function DataCreate() {
           weight: weight,
           req_shipment: reqShipment,
           tracking_id: trackingId,
-          shipment_size: shipmentSize,
+          shipment_size: reducing,
           boxCount: boxCount,
           specification: specifications,
           check_list_qunatity: checkList
@@ -59,6 +82,7 @@ export default function DataCreate() {
       navigator("/")
       window.location.reload(false)
     }
+
 
   return (
     <div className="container mt-5" id="DataCreate">
@@ -190,15 +214,16 @@ export default function DataCreate() {
         <div className="col-md-6 col-lg-6">
           <div className="mb-3">
             <label className="form-label">
-              Enter Shipment size
+              Enter Shipment size.
             </label>
+              <p>enter in format please give space after number</p>
             <input
-              type="number"
+              type="text"
               className="form-control"
               required
-              placeholder="Shipment size"
-              onChange={(e)=>setShipmentSize(e.target.value)}
-            />
+              placeholder="Length, height, width "
+              onChange={handleShipmentDetails}
+              />
           </div>
         </div>
         <div className="col-md-6 col-lg-6">
