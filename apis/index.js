@@ -1,12 +1,14 @@
 const express = require("express")
 const user = require("./roles/userController")
 const data = require("./roles/DataController")
-const app = express()
 const cors = require("cors")
+const env = require("dotenv")
+const app = express()
 
 app.use(cors({origin : "*"}))
+env.config()
 
-app.listen(3200, ()=>{
+app.listen(process.env.PORT || 3200, ()=>{
     console.log("server listening at 3200")
 })
 
