@@ -19,7 +19,7 @@ export default function AdminPage() {
         method: "get",
         headers: { "Content-Type": "application/json", role: roleKey },
       };
-      await fetch("http://localhost:3200/data/", options)
+      await fetch("https://userroles.onrender.com/data/", options)
         .then((res) => res.json())
         .then((data) => {
           if (data.success) {
